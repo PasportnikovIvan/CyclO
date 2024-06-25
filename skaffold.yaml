@@ -1,0 +1,98 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: cyclo
+build:
+  tagPolicy:
+    sha256: {}
+  local:
+    push: false
+    useDockerCLI: true
+  artifacts:
+    - image: warehouse-service
+      context: services/warehouse-service
+      jib: {
+        args: [
+          '-Djib.to.image=warehouse-service',
+          '-Djib.container.environment=SPRING_PROFILES_ACTIVE=development',
+          '-DskipTests=true'
+        ]
+      }
+    - image: user-service
+      context: services/user-service
+      jib: {
+        args: [
+          '-Djib.to.image=user-service',
+          '-Djib.container.environment=SPRING_PROFILES_ACTIVE=development',
+          '-DskipTests=true'
+        ]
+      }
+    - image: bike-service
+      context: services/bike-service
+      jib: {
+        args: [
+          '-Djib.to.image=bike-service',
+          '-Djib.container.environment=SPRING_PROFILES_ACTIVE=development',
+          '-DskipTests=true'
+        ]
+      }
+    - image: rental-service
+      context: services/rental-service
+      jib: {
+        args: [
+          '-Djib.to.image=rental-service',
+          '-Djib.container.environment=SPRING_PROFILES_ACTIVE=development',
+          '-DskipTests=true'
+        ]
+      }
+deploy:
+  kubectl:
+    manifests:
+      # Databases
+      - k8s/dev/0/00-database-namespace.yaml
+
+      # Warehouse Service Database
+      - k8s/dev/3/00-warehouse-service-db-credentials.yaml
+      - k8s/dev/4/00-warehouse-service-db-deployment.yaml
+      - k8s/dev/5/00-warehouse-service-db-service.yaml
+
+      # User Service Database
+      - k8s/dev/3/00-user-service-db-credentials.yaml
+      - k8s/dev/4/00-user-service-db-deployment.yaml
+      - k8s/dev/5/00-user-service-db-service.yaml
+
+      # Bike Service Database
+      - k8s/dev/3/00-bike-service-db-credentials.yaml
+      - k8s/dev/4/00-bike-service-db-deployment.yaml
+      - k8s/dev/5/00-bike-service-db-service.yaml
+
+      # Rental Service Database
+      - k8s/dev/3/00-rental-service-db-credentials.yaml
+      - k8s/dev/4/00-rental-service-db-deployment.yaml
+      - k8s/dev/5/00-rental-service-db-service.yaml
+
+      # kafka
+      - k8s/dev/0/00-kafka-namespace.yaml
+      - k8s/dev/4/00-zookeeper-deployment.yaml
+      - k8s/dev/5/00-zookeeper-service.yaml
+      - k8s/dev/4/10-kafka-broker-deployment.yaml
+      - k8s/dev/5/10-kafka-broker-service.yaml
+
+      # Services
+      - k8s/dev/3/00-gc-secret.yaml
+
+      # Warehouse Service
+      - k8s/dev/4/20-warehouse-service-deployment.yaml
+      - k8s/dev/5/20-warehouse-service-service.yaml
+
+      # User Service
+      - k8s/dev/4/20-user-service-deployment.yaml
+      - k8s/dev/5/20-user-service-service.yaml
+
+      # Bike Service
+      - k8s/dev/4/20-bike-service-deployment.yaml
+      - k8s/dev/5/20-bike-service-service.yaml
+
+      # Rental Service
+      - k8s/dev/4/20-rental-service-deployment.yaml
+      - k8s/dev/5/20-rental-service-service.yaml
