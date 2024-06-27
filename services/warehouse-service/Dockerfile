@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM openjdk:15-jdk-alpine
+FROM openjdk:11-jdk-slim
 
 # Add Maintainer Info
 LABEL maintainer="your_email@example.com"
@@ -11,7 +11,7 @@ VOLUME /tmp
 EXPOSE 8080
 
 # The application's jar file
-ARG JAR_FILE=target/rental-service-1.0-SNAPSHOT.jar
+ARG JAR_FILE=target/warehouse-service-1.0-SNAPSHOT.jar
 
 # Add the application's jar to the container
 ADD ${JAR_FILE} app.jar
