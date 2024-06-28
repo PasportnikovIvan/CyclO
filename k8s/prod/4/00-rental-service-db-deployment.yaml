@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rental-service-db
+  name: rental-service-db
+  namespace: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rental-service-db
+  template:
+    metadata:
+      labels:
+        app: rental-service-db
+    spec:
+      containers:
+        - name: rental-service-db
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: rental-service-db
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rental-service-db-credentials
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: issue-service-db-credentials
+                  key: password
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
