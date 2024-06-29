@@ -1,7 +1,6 @@
 package dev.rentalService.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class RentalRecord {
@@ -10,13 +9,12 @@ public class RentalRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Long userId;
+    private Long bikePartId;
+    private boolean isActive;
 
-    private LocalDateTime creationTime;
-
-    // Getters and Setters
+    // Constructors, getters, and setters
+    public RentalRecord() {}
 
     public Long getId() {
         return id;
@@ -26,20 +24,27 @@ public class RentalRecord {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public LocalDateTime getCreationTime() {
-        return creationTime;
+    public Long getBikePartId() {
+        return bikePartId;
     }
 
-    public void setCreationTime(LocalDateTime creationTime) {
-        this.creationTime = creationTime;
+    public void setBikePartId(Long bikePartId) {
+        this.bikePartId = bikePartId;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
-

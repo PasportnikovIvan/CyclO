@@ -4,17 +4,14 @@ FROM openjdk:15-jdk-alpine
 # Add Maintainer Info
 LABEL maintainer="your_email@example.com"
 
-# Add a volume pointing to /tmp
+# Set a volume pointing to /tmp
 VOLUME /tmp
+
+# The application's jar file (ensure that this is the correct path and name of your jar file)
+COPY target/rental-service-0.0.1-SNAPSHOT.jar app.jar
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-# The application's jar file
-ARG JAR_FILE=target/rental-service-1.0-SNAPSHOT.jar
-
-# Add the application's jar to the container
-ADD ${JAR_FILE} app.jar
-
 # Run the jar file
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
