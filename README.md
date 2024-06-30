@@ -26,6 +26,8 @@ CyclO is an innovative program designed to improve the health and well-being of 
 - **Database**: PostgreSQL (Relational Database)
 - **Cache**: Hazelcast
 - **Messaging**: Kafka
+
+
 ~~- **Security**: OAuth2 or Basic Authorization
 - **Web Services**: REST
 - **Deployment**: Heroku
