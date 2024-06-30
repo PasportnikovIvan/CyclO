@@ -118,5 +118,29 @@ The application is designed using the event-based architecture pattern to handle
    - Start the application and verify all services are running correctly.
    - Perform initial testing and debugging.
 
+## Use Cases
+### Employees (End Users)
+- **Browse Available Bicycles**: View currently available bikes.
+- **Reserve Bicycles**: Book a bike for a specific date and time.
+- **View Rental History**: Check past rentals including dates and duration.
+- **Cancel Reservations**: Cancel a booking if plans change.
 
+### Program Administrator
+- **Manage User Accounts**: Create, update, and deactivate user accounts.
+- **Manage Bicycle Inventory**: Add, update, and remove bikes.
+- **Track Maintenance**: Schedule and monitor bike maintenance.
+- **Generate Reports**: Create reports on bike usage and system performance.
+
+### Company Management
+- **Access Reports**: View overall statistics and generated reports.
+- **Program Development**: Make strategic decisions based on data.
+- **Evaluate Program Impact**: Analyze the effect on productivity and employee health.
+
+### Maintenance Personnel
+- **Access Maintenance Information**: View maintenance needs for each bike.
+- **Perform Maintenance**: Carry out repairs and upkeep tasks.
+- **Record Maintenance Actions**: Log completed maintenance activities.
+
+## Logging and Monitoring
+- **Interceptors**: Implement interceptors for logging requests and responses to aid in debugging and monitoring system usage.
 
