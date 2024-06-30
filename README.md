@@ -98,48 +98,53 @@ The application is designed using the event-based architecture pattern to handle
    - Adherence to local and international regulations (e.g., GDPR)
 
 ## Deployment Instructions
-1. **Initialize the Database**
-   - Set up PostgreSQL database and run initial scripts to create tables and seed data (e.g., admin account).
 
-2. **Deploy Backend on Heroku**
-   - Push the Spring Boot application to a Heroku repository.
-   - Configure environment variables for database connections and API keys.
+### Step 1: Clone the Repository
 
-3. **Deploy Frontend**
-   - Build the React application and deploy it to a hosting service (e.g., Heroku, Netlify).
+First, clone the Cyclo app repository to your local machine:
 
-4. **Set Up Kafka (optional)**
-   - Configure Kafka for message brokering if used.
+```bash
+git clone https://gitlab.fel.cvut.cz/mashkvla/cyclo.git
+```
 
-5. **Configure Hazelcast (optional)**
-   - Set up Hazelcast for caching if implemented.
+### Step 2: Configure the Database
 
-6. **Launch the Application**
-   - Start the application and verify all services are running correctly.
-   - Perform initial testing and debugging.
+Ensure your PostgreSQL is running and accessible. The script will create a new database and a user, so ensure that your PostgreSQL user has the necessary permissions to create databases and roles.
 
-## Use Cases
-### Employees (End Users)
-- **Browse Available Bicycles**: View currently available bikes.
-- **Reserve Bicycles**: Book a bike for a specific date and time.
-- **View Rental History**: Check past rentals including dates and duration.
-- **Cancel Reservations**: Cancel a booking if plans change.
+### Step 3: Run the Deployment Script
 
-### Program Administrator
-- **Manage User Accounts**: Create, update, and deactivate user accounts.
-- **Manage Bicycle Inventory**: Add, update, and remove bikes.
-- **Track Maintenance**: Schedule and monitor bike maintenance.
-- **Generate Reports**: Create reports on bike usage and system performance.
+Make the script executable and run it:
 
-### Company Management
-- **Access Reports**: View overall statistics and generated reports.
-- **Program Development**: Make strategic decisions based on data.
-- **Evaluate Program Impact**: Analyze the effect on productivity and employee health.
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
 
-### Maintenance Personnel
-- **Access Maintenance Information**: View maintenance needs for each bike.
-- **Perform Maintenance**: Carry out repairs and upkeep tasks.
-- **Record Maintenance Actions**: Log completed maintenance activities.
+The script will perform the following actions:
+1. Create and set up the PostgreSQL database and user.
+2. Initialize the database with the required schema and data.
+3. Build all microservices using Maven.
+4. Start each microservice in the background.
+
+## Running the Application
+
+Once the script completes, the microservices will be running in the background on your machine:
+- **Rental Service**
+- **Warehouse Service**
+- **User Service**
+- **Bike Service**
+
+Each service will be accessible via their respective ports, which are configured in their application properties.
+## Stopping the Services
+
+If you need to stop the services, you can find their process IDs (PIDs) and kill them:
+
+```bash
+ps aux | grep java
+kill <PID>
+```
+
+Replace `<PID>` with the process ID of the service you want to stop.
 
 ## Logging and Monitoring
 - **Interceptors**: Implement interceptors for logging requests and responses to aid in debugging and monitoring system usage.
