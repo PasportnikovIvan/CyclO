@@ -1,7 +1,7 @@
 package dev.bikeService.service;
 
 import dev.bikeService.entity.Bike;
-import dev.bikeService.repository.BikeRepository;
+import dev.bikeService.repository.BikeRepositoryElasticsearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,27 +11,27 @@ import java.util.UUID;
 @Service
 public class BikeService {
 
-    private final BikeRepository bikeRepository;
+    private final BikeRepositoryElasticsearch bikeRepositoryElasticsearch;
 
     @Autowired
-    public BikeService(BikeRepository bikeRepository) {
-        this.bikeRepository = bikeRepository;
+    public BikeService(BikeRepositoryElasticsearch bikeRepositoryElasticsearch) {
+        this.bikeRepositoryElasticsearch = bikeRepositoryElasticsearch;
     }
 
     public List<Bike> getAllBikes() {
-        return (List<Bike>) bikeRepository.findAll();
+        return (List<Bike>) bikeRepositoryElasticsearch.findAll();
     }
 
     public Bike getBikeById(UUID id) {
-        return bikeRepository.findById(String.valueOf(id))
+        return bikeRepositoryElasticsearch.findById(String.valueOf(id))
                 .orElseThrow(() -> new RuntimeException("Bike not found with id: " + id));
     }
 
     public Bike createBike(Bike bike) {
-        return bikeRepository.save(bike);
+        return bikeRepositoryElasticsearch.save(bike);
     }
 
     public void deleteBike(UUID id) {
-        bikeRepository.deleteById(String.valueOf(id));
+        bikeRepositoryElasticsearch.deleteById(String.valueOf(id));
     }
 }
