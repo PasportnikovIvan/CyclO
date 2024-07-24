@@ -15,12 +15,18 @@ import java.util.List;
 @Service
 public class WarehouseService {
 
+    private final WarehouseRepository warehouseRepository;
+    private final BikePartRepository bikePartRepository;
+    private final MessageProducer messageProducer;
+
     @Autowired
-    private WarehouseRepository warehouseRepository;
-    @Autowired
-    private BikePartRepository bikePartRepository;
-    @Autowired
-    private MessageProducer messageProducer;
+    public WarehouseService(WarehouseRepository warehouseRepository,
+                            BikePartRepository bikePartRepository,
+                            MessageProducer messageProducer) {
+        this.warehouseRepository = warehouseRepository;
+        this.bikePartRepository = bikePartRepository;
+        this.messageProducer = messageProducer;
+    }
 
     public List<Warehouse> getAllWarehouses() {
         return warehouseRepository.findAll();
@@ -46,28 +52,14 @@ public class WarehouseService {
         warehouseRepository.delete(warehouse);
     }
 
-    /**
-     * Updates the inventory for a given BikePart.
-     *
-     * @param partId   the ID of the BikePart to update
-     * @param quantity the new quantity to set
-     */
     @Transactional
     public void updateInventory(Long partId, int quantity) {
-        // Fetch the BikePart from the database
         BikePart bikePart = bikePartRepository.findById(partId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid part ID: " + partId));
-
         bikePartRepository.save(bikePart);
 
-        // Construct a message detailing the inventory update
         String inventoryMessage = String.format("Inventory updated for BikePart: %d, new quantity: %d", partId, quantity);
-
-        // Send the message to the 'warehouse-topic' Kafka topic
         messageProducer.sendMessage("warehouse-topic", inventoryMessage);
-
-        // Log the action or perform additional business logic if necessary
         System.out.println(inventoryMessage);
     }
 }
-

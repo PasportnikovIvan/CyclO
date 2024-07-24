@@ -11,15 +11,20 @@ import java.util.UUID;
 @Service
 public class BikeService {
 
+    private final BikeRepository bikeRepository;
+
     @Autowired
-    private BikeRepository bikeRepository;
+    public BikeService(BikeRepository bikeRepository) {
+        this.bikeRepository = bikeRepository;
+    }
 
     public List<Bike> getAllBikes() {
-        return bikeRepository.findAll();
+        return (List<Bike>) bikeRepository.findAll();
     }
 
     public Bike getBikeById(UUID id) {
-        return bikeRepository.findById(id).orElseThrow(() -> new RuntimeException("Bike not found"));
+        return bikeRepository.findById(String.valueOf(id))
+                .orElseThrow(() -> new RuntimeException("Bike not found with id: " + id));
     }
 
     public Bike createBike(Bike bike) {
@@ -27,6 +32,6 @@ public class BikeService {
     }
 
     public void deleteBike(UUID id) {
-        bikeRepository.deleteById(id);
+        bikeRepository.deleteById(String.valueOf(id));
     }
 }
