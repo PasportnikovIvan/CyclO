@@ -1,11 +1,13 @@
 package dev.warehouseService.service;
 
+import dev.shared.CustomLoggerFactory;
 import dev.warehouseService.entity.BikePart;
 import dev.warehouseService.entity.Warehouse;
 import dev.warehouseService.exception.ResourceNotFoundException;
 import dev.warehouseService.kafka.MessageProducer;
 import dev.warehouseService.repository.BikePartRepository;
 import dev.warehouseService.repository.WarehouseRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ public class WarehouseService {
     private final WarehouseRepository warehouseRepository;
     private final BikePartRepository bikePartRepository;
     private final MessageProducer messageProducer;
+
+    private static final Logger logger = CustomLoggerFactory.getLogger(WarehouseService.class);
 
     @Autowired
     public WarehouseService(WarehouseRepository warehouseRepository,
@@ -60,6 +64,6 @@ public class WarehouseService {
 
         String inventoryMessage = String.format("Inventory updated for BikePart: %d, new quantity: %d", partId, quantity);
         messageProducer.sendMessage("warehouse-topic", inventoryMessage);
-        System.out.println(inventoryMessage);
+        logger.info(inventoryMessage);
     }
 }

@@ -2,9 +2,12 @@ package dev.rentalService.service;
 
 import dev.rentalService.entity.RentalRecord;
 import dev.rentalService.entity.User;
+import dev.rentalService.kafka.MessageConsumer;
 import dev.rentalService.kafka.MessageProducer;
 import dev.rentalService.repository.RentalRecordRepository;
 import dev.rentalService.repository.UserRepository;
+import dev.shared.CustomLoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,8 @@ public class RentalService {
     private RentalRecordRepository rentalRecordRepository;
     @Autowired
     private UserRepository userRepository;
+
+    private static final Logger logger = CustomLoggerFactory.getLogger(RentalService.class);
 
     public List<RentalRecord> getAllRentalRecords() {
         return rentalRecordRepository.findAll();
@@ -54,7 +59,7 @@ public class RentalService {
         String startMessage = String.format("Rental started: User %d, BikePart %d", userId, bikePartId);
         messageProducer.sendMessage("rental-topic", startMessage);
 
-        System.out.println(startMessage);
+        logger.info(startMessage);
     }
 
     /**
@@ -72,6 +77,6 @@ public class RentalService {
         String endMessage = String.format("Rental ended: Rental ID %d", rentalId);
         messageProducer.sendMessage("rental-topic", endMessage);
 
-        System.out.println(endMessage);
+        logger.info(endMessage);
     }
 }

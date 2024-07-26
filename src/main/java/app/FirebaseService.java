@@ -11,7 +11,11 @@ import com.google.auth.oauth2.GoogleCredentials;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import dev.shared.utils.LoggerFactory;
+
 public class FirebaseService {
+
+    private static final Logger logger = CustomLoggerFactory.getLogger(FirebaseService.class);
 
     public void initializeFirebaseApp(String tokenPath) throws IOException {
         FileInputStream serviceAccount = new FileInputStream(tokenPath);
@@ -32,12 +36,12 @@ public class FirebaseService {
                 .setDisplayName(userType);  // Assuming 'userType' is used as the display name
 
         UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-        System.out.println("Successfully created new user: " + userRecord.getUid());
+        logger.info("Successfully created new user: " + userRecord.getUid());
     }
 
     public static void main(String[] args) {
         if (args.length != 4) {
-            System.out.println("Usage: java app.FirebaseService <email> <password> <user_type> <token_path>");
+            logger.info("Usage: java app.FirebaseService <email> <password> <user_type> <token_path>");
             return;
         }
 

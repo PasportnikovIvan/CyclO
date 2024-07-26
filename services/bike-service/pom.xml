@@ -56,11 +56,10 @@
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
             <version>7.17.21</version> <!-- Make sure to use the version compatible with your Elasticsearch server -->
         </dependency>
-
-        <!-- SLF4J with Logback for logging -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
+            <groupId>dev.shared</groupId>
+            <artifactId>shared-utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
