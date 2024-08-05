@@ -1,39 +1,45 @@
 package dev.bikeService.controller;
 
-import dev.bikeService.entity.Bike;
-import dev.bikeService.service.impl.BikeServiceImpl;
+import dev.bikeService.dto.BikeDTO;
+import dev.bikeService.service.BikeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/bikes")
 public class BikeController {
 
+    private final BikeService bikeService;
+
     @Autowired
-    private BikeServiceImpl bikeServiceImpl;
+    public BikeController(BikeService bikeService) {
+        this.bikeService = bikeService;
+    }
 
     @GetMapping
-    public ResponseEntity<List<Bike>> getAllBikes() {
-        return ResponseEntity.ok(bikeServiceImpl.getAllBikes());
+    public List<BikeDTO> getAllBikes() {
+        return bikeService.getAllBikes();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Bike> getBikeById(@PathVariable UUID id) {
-        return ResponseEntity.ok(bikeServiceImpl.getBikeById(id));
+    public BikeDTO getBikeById(@PathVariable Long id) {
+        return bikeService.getBikeById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Bike> createBike(@RequestBody Bike bike) {
-        return ResponseEntity.ok(bikeServiceImpl.createBike(bike));
+    public BikeDTO createBike(@RequestBody BikeDTO bikeDTO) {
+        return bikeService.createBike(bikeDTO);
+    }
+
+    @PutMapping("/{id}")
+    public BikeDTO updateBike(@PathVariable Long id, @RequestBody BikeDTO bikeDTO) {
+        return bikeService.updateBike(id, bikeDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBike(@PathVariable UUID id) {
-        bikeServiceImpl.deleteBike(id);
-        return ResponseEntity.noContent().build();
+    public void deleteBike(@PathVariable Long id) {
+        bikeService.deleteBike(id);
     }
 }

@@ -9,7 +9,7 @@ public class Bike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false)
     private boolean parked;
@@ -25,4 +25,44 @@ public class Bike {
     private String model;
 
     // Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isParked() {
+        return parked;
+    }
+
+    public void setParked(boolean parked) {
+        this.parked = parked;
+    }
+
+    public BikeParkingStation getStation() {
+        return station;
+    }
+
+    public void setStation(BikeParkingStation station) {
+        this.station = station;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
 }
