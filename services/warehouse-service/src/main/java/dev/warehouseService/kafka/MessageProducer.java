@@ -1,10 +1,10 @@
 package dev.warehouseService.kafka;
 
-import dev.shared.CustomLoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import shared.CustomLoggerFactory;
 
 @Service
 public class MessageProducer {

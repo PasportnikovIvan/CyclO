@@ -1,4 +1,5 @@
-package dev.shared;
+package shared;
+
 public class DecoratedLogger extends LoggerAdapter {
 
     public DecoratedLogger(Class<?> clazz) {

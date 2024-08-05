@@ -1,4 +1,4 @@
-package dev.shared;
+package shared;
 
 import org.slf4j.Logger;
 

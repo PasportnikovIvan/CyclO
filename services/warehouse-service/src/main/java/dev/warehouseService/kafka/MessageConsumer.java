@@ -3,7 +3,7 @@ package dev.warehouseService.kafka;
 import org.slf4j.Logger;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import dev.shared.CustomLoggerFactory;
+import shared.CustomLoggerFactory;
 
 @Component
 public class MessageConsumer {

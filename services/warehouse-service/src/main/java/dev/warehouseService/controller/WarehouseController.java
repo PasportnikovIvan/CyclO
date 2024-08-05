@@ -1,5 +1,6 @@
 package dev.warehouseService.controller;
 
+import dev.warehouseService.dto.WarehouseDTO;
 import dev.warehouseService.entity.Warehouse;
 import dev.warehouseService.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +16,22 @@ public class WarehouseController {
     private WarehouseService warehouseService;
 
     @GetMapping
-    public List<Warehouse> getAllWarehouses() {
+    public List<WarehouseDTO> getAllWarehouses() {
         return warehouseService.getAllWarehouses();
     }
 
     @GetMapping("/{id}")
-    public Warehouse getWarehouseById(@PathVariable Long id) {
+    public WarehouseDTO getWarehouseById(@PathVariable Long id) {
         return warehouseService.getWarehouseById(id);
     }
 
     @PostMapping
-    public Warehouse createWarehouse(@RequestBody Warehouse warehouse) {
+    public WarehouseDTO createWarehouse(@RequestBody WarehouseDTO warehouse) {
         return warehouseService.createWarehouse(warehouse);
     }
 
     @PutMapping("/{id}")
-    public Warehouse updateWarehouse(@PathVariable Long id, @RequestBody Warehouse warehouseDetails) {
+    public WarehouseDTO updateWarehouse(@PathVariable Long id, @RequestBody WarehouseDTO warehouseDetails) {
         return warehouseService.updateWarehouse(id, warehouseDetails);
     }
 
@@ -39,4 +40,3 @@ public class WarehouseController {
         warehouseService.deleteWarehouse(id);
     }
 }
-

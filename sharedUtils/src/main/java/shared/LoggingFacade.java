@@ -1,4 +1,4 @@
-package dev.shared;
+package shared;
 
 public class LoggingFacade {
 
