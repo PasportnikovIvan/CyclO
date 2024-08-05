@@ -15,7 +15,7 @@
         <module>services/user-service</module>
         <module>services/bike-service</module>
         <module>services/rental-service</module>
-        <module>shared-utils</module>
+        <module>sharedUtils</module>
     </modules>
 
     <properties>
@@ -68,7 +68,7 @@
         </dependency>
         <dependency>
             <groupId>dev.shared</groupId>
-            <artifactId>shared-utils</artifactId>
+            <artifactId>sharedUtils</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
