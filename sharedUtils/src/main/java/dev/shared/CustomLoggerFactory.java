@@ -4,32 +4,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A singleton factory class for creating logger instances. This class ensures that only
- * one instance of each logger is created per class, reducing redundant instances and
- * maintaining a central point for logger configuration.
+ * A utility class for creating logger instances. This class provides static methods to get logger instances,
+ * thus avoiding the need for object creation. It utilizes the underlying SLF4J LoggerFactory.
  */
-public class CustomLoggerFactory {
+public final class CustomLoggerFactory {
 
-    private static CustomLoggerFactory instance;
-
-    // Private constructor to prevent instantiation from outside this class.
-    private CustomLoggerFactory() {}
-
-    /**
-     * This method ensures that the CustomLoggerFactory is a singleton and synchronized to
-     * handle multithreaded access.
-     *
-     * @return The single instance of CustomLoggerFactory.
-     */
-    public static synchronized CustomLoggerFactory getInstance() {
-        if (instance == null) {
-            instance = new CustomLoggerFactory();
-        }
-        return instance;
+    // Private constructor to prevent instantiation of the utility class.
+    private CustomLoggerFactory() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     /**
-     * Provides a logger for a given class, utilizing the underlying SLF4J LoggerFactory.
+     * Provides a logger for a given class.
      *
      * @param clazz The class for which the logger is to be created.
      * @return The logger associated with the specified class.

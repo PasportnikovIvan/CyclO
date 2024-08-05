@@ -7,7 +7,7 @@ public class LoggerAdapter {
     private final Logger logger;
 
     public LoggerAdapter(Class<?> clazz) {
-        this.logger = CustomLoggerFactory.getInstance().getLogger(clazz);
+        this.logger = CustomLoggerFactory.getLogger(clazz);
     }
 
     public void info(String msg) {
