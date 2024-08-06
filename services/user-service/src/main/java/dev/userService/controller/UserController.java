@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+/**
+ * REST controller for managing user-related operations.
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -21,24 +23,42 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    /**
+     * Gets a list of all users.
+     *
+     * @return a list of {@link UserDTO}
+     */
     @GetMapping
     public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
-
+    /**
+     * Gets a user by its ID.
+     *
+     * @param id the ID of the user
+     * @return the {@link UserDTO}
+     */
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO userDTO = userService.getUserById(id);
         return ResponseEntity.ok(userDTO);
     }
-
+    /**
+     * Creates a new user.
+     *
+     * @param userDTO the user details
+     * @return the created {@link UserDTO}
+     */
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         UserDTO createdUser = userService.createUser(userDTO);
         return ResponseEntity.ok(createdUser);
     }
-
+    /**
+     * Deletes a user by its ID.
+     *
+     * @param id the ID of the user to delete
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);

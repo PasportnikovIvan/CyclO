@@ -1,5 +1,7 @@
 package dev.userService.dto;
-
+/**
+ * Data Transfer Object for user information.
+ */
 public class UserDTO {
     private Long id;
     private String name;
