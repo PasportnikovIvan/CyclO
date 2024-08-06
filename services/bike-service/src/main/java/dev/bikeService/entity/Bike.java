@@ -2,7 +2,9 @@ package dev.bikeService.entity;
 
 import javax.persistence.*;
 import java.util.UUID;
-
+/**
+ * Entity representing a bike.
+ */
 @Entity
 @Table(name = "bikes")
 public class Bike {

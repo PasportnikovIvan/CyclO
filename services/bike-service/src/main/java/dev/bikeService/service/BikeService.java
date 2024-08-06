@@ -5,7 +5,9 @@ import dev.bikeService.entity.Bike;
 
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * Service interface for managing bikes.
+ */
 public interface BikeService {
     List<BikeDTO> getAllBikes();
     BikeDTO getBikeById(Long id);

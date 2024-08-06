@@ -1,5 +1,7 @@
 package dev.bikeService.dto;
-
+/**
+ * Data Transfer Object for bike information.
+ */
 public class BikeDTO {
     private Long id;
     private String name;
