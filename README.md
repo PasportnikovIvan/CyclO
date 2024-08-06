@@ -28,7 +28,7 @@ CyclO is an innovative program designed to improve the health and well-being of 
 - **Messaging**: Kafka
 
 
-~~ - **Security**: OAuth2 or Basic Authorization
+- **Security**: Basic Authorization
 - **Web Services**: REST
 - **Deployment**: Heroku
 - **Search**: Elasticsearch (optional)~~
@@ -149,3 +149,21 @@ Replace `<PID>` with the process ID of the service you want to stop.
 ## Logging and Monitoring
 - **Interceptors**: Implement interceptors for logging requests and responses to aid in debugging and monitoring system usage.
 
+## Semester Project Requirements for Submission at the End of the Semester
+
+| Requirement | Status | Description of Use                                                                               |
+|-------------|--------|--------------------------------------------------------------------------------------------------|
+| Selection of appropriate technology and language | ✅ | Java/SpringBoot technology used                                                                  |
+| Readme in Git with a description of what is done | ✅ | Comprehensive readme file with detailed project implementation                                   |
+| Use of a common database | ✅ | PostgreSQL database used                                                                         |
+| Use of cache | ✅ | Implemented caching for frequently accessed bike data                                            |
+| Use of messaging principle | ✅ | Kafka used for messaging between services for bike rental and return events                      |
+| Security | ✅ | Basic authorization implemented                                                                  |
+| Use of Interceptors | ✅ | Request logging using Interceptors                                                               |
+| Use of REST | ✅ | API built on REST architecture                                                                   |
+| Deployment to a production server like Heroku | ❌ | Not covered in our course                                                                        |
+| Selection of appropriate architecture | ✅ | Event-driven architecture used                                                                   |
+| Initialization procedure | ✅ | Described in the documentation                                                                   |
+| Use of Elasticsearch | ✅ | Implemented for full-text search capabilities                                                    |
+| Use of at least 5 design patterns | ✅ | Implemented in the Logger Utility [sharedUtils] (singleton, factory, adapter, decorator, facade) |
+| 2 Use Cases per team member | ✅ | Described in the documentation                                                                   |
