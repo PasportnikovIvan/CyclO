@@ -11,7 +11,8 @@ import com.google.auth.oauth2.GoogleCredentials;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import dev.shared.utils.LoggerFactory;
+import org.slf4j.Logger;
+import shared.CustomLoggerFactory;
 
 public class FirebaseService {
 

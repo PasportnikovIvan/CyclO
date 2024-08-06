@@ -4,6 +4,7 @@ import dev.warehouseService.dto.WarehouseDTO;
 import dev.warehouseService.entity.Warehouse;
 import dev.warehouseService.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,5 +39,11 @@ public class WarehouseController {
     @DeleteMapping("/{id}")
     public void deleteWarehouse(@PathVariable Long id) {
         warehouseService.deleteWarehouse(id);
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<Void> updateInventory(@RequestParam Long partId, @RequestParam int quantity) {
+        warehouseService.updateInventory(partId, quantity);
+        return ResponseEntity.noContent().build();
     }
 }

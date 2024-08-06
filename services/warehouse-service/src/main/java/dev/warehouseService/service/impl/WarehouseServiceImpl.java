@@ -10,7 +10,6 @@ import dev.warehouseService.repository.BikePartRepository;
 import dev.warehouseService.repository.WarehouseRepository;
 import dev.warehouseService.service.WarehouseService;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shared.CustomLoggerFactory;
 

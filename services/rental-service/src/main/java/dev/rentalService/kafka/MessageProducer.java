@@ -10,6 +10,10 @@ public class MessageProducer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    public MessageProducer(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
     public void sendMessage(String topic, String message) {
         kafkaTemplate.send(topic, message);
     }

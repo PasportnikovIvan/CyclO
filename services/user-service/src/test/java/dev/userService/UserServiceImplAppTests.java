@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * The type User service application tests.
  */
 @SpringBootTest
-class UserServiceAppTests {
+class UserServiceImplAppTests {
 
     /**
      * Context loads.
