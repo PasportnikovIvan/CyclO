@@ -1,4 +1,4 @@
-package app;
+package dev.shared.firebase;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
