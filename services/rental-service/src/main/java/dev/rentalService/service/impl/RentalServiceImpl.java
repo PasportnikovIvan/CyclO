@@ -18,6 +18,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for managing rental records.
+ * Provides methods for creating, updating, retrieving, and deleting rental records,
+ * as well as starting and ending rentals.
+ */
 @Service
 public class RentalServiceImpl implements RentalService {
 
@@ -29,6 +34,14 @@ public class RentalServiceImpl implements RentalService {
 
     private static final Logger logger = CustomLoggerFactory.getLogger(RentalServiceImpl.class);
 
+    /**
+     * Constructs a new RentalServiceImpl with the specified repositories, message producer, and mapper.
+     *
+     * @param rentalRecordRepository the repository for rental records
+     * @param userRepository the repository for users
+     * @param messageProducer the producer for sending messages
+     * @param rentalMapper the mapper for converting between entities and DTOs
+     */
     @Autowired
     public RentalServiceImpl(RentalRecordRepository rentalRecordRepository,
                              UserRepository userRepository,
@@ -40,6 +53,11 @@ public class RentalServiceImpl implements RentalService {
         this.rentalMapper = rentalMapper;
     }
 
+    /**
+     * Retrieves all rental records.
+     *
+     * @return a list of RentalDTO objects representing all rental records
+     */
     @Override
     public List<RentalDTO> getAllRentalRecords() {
         return rentalRecordRepository.findAll().stream()
@@ -47,6 +65,13 @@ public class RentalServiceImpl implements RentalService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves a rental record by its ID.
+     *
+     * @param rentalId the ID of the rental record to retrieve
+     * @return the RentalDTO representing the retrieved rental record
+     * @throws ResourceNotFoundException if no rental record is found with the given ID
+     */
     @Override
     public RentalDTO getRentalRecordById(Long rentalId) {
         RentalRecord rentalRecord = rentalRecordRepository.findById(rentalId)
@@ -54,6 +79,12 @@ public class RentalServiceImpl implements RentalService {
         return rentalMapper.rentalToRentalDTO(rentalRecord);
     }
 
+    /**
+     * Creates a new rental record.
+     *
+     * @param rentalDTO the RentalDTO representing the rental record to create
+     * @return the RentalDTO representing the created rental record
+     */
     @Override
     public RentalDTO createRentalRecord(RentalDTO rentalDTO) {
         RentalRecord rentalRecord = rentalMapper.rentalDTOToRental(rentalDTO);
@@ -61,6 +92,14 @@ public class RentalServiceImpl implements RentalService {
         return rentalMapper.rentalToRentalDTO(savedRental);
     }
 
+    /**
+     * Updates an existing rental record.
+     *
+     * @param rentalId the ID of the rental record to update
+     * @param rentalDetails the RentalDTO containing the updated rental details
+     * @return the RentalDTO representing the updated rental record
+     * @throws ResourceNotFoundException if no rental record is found with the given ID
+     */
     @Override
     public RentalDTO updateRentalRecord(Long rentalId, RentalDTO rentalDetails) {
         RentalRecord rentalRecord = rentalRecordRepository.findById(rentalId)
@@ -72,6 +111,12 @@ public class RentalServiceImpl implements RentalService {
         return rentalMapper.rentalToRentalDTO(updatedRental);
     }
 
+    /**
+     * Deletes a rental record by its ID.
+     *
+     * @param rentalId the ID of the rental record to delete
+     * @throws ResourceNotFoundException if no rental record is found with the given ID
+     */
     @Override
     public void deleteRentalRecord(Long rentalId) {
         RentalRecord rentalRecord = rentalRecordRepository.findById(rentalId)
@@ -82,7 +127,7 @@ public class RentalServiceImpl implements RentalService {
     /**
      * Starts a rental for a user and a specific bike part.
      *
-     * @param userId    the user ID who is renting
+     * @param userId the user ID who is renting
      * @param bikePartId the bike part ID being rented
      */
     @Override
@@ -104,6 +149,7 @@ public class RentalServiceImpl implements RentalService {
      * Ends a rental by setting it as inactive.
      *
      * @param rentalId the ID of the rental to end
+     * @throws IllegalArgumentException if the rental ID is invalid
      */
     @Override
     @Transactional

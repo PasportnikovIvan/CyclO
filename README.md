@@ -10,7 +10,7 @@
 </dl>
 </div>
 
-### CyclO Project README
+### [Odkaz na dokumentaci](https://docs.google.com/document/d/1mb7Pm2Jiu1zmfUpbrD8YbjrDyBaJ5JkFVmAfJ4jR54Y/edit?usp=sharing)
 
 # CyclO: Internal Information System for CyclO s.r.o.
 
