@@ -104,7 +104,7 @@ The application is designed using the event-based architecture pattern to handle
 First, clone the Cyclo app repository to your local machine:
 
 ```bash
-git clone https://gitlab.fel.cvut.cz/mashkvla/cyclo.git
+git clone https://github.com/PasportnikovIvan/CyclO.git
 ```
 
 ### Step 2: Configure the Database
